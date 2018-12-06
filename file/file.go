@@ -46,7 +46,7 @@ func (_ *f) Put(path, val string) error {
 
 	data := c.Seal(nil, nonce, []byte(val), nil)
 
-	o, err := os.Create(path)
+	o, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0600)
 	if err != nil {
 		return err
 	}
